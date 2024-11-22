@@ -1,12 +1,14 @@
 import express from 'express'
 import { connectDB } from './config/db.js'
 import dotenv from 'dotenv'
+import e from 'express';
 
 dotenv.config();
 
 connectDB();
 
 const app = express();
+express.json();
 
 app.get('/welcome/', (req, res) => {
     res.send('Welcome in Darooma API');
