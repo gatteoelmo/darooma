@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
     "email": "ellie@me.com",
-    "password": "Ellie1"
+    "password": "Ellie179"
 }
 
 ### get all all users
@@ -31,5 +31,20 @@ PATCH http://localhost:1234/api/users/modify/6740b562a1715eb7ea60258e
 Content-Type: application/json
 
 {
-    "password": "Ellie1"
+    "password": "Ellie17"
+}
+
+### get all goals
+GET http://localhost:1234/api/goals/
+
+### create goal
+POST http://localhost:1234/api/goals/create
+Content-Type: application/json
+
+{
+    "user": "6740b562a1715eb7ea60258e",
+    "title": "goal title",
+    "description": "goal description",
+    "difficulty": "",
+    "deadline": "2024-11-23"
 }

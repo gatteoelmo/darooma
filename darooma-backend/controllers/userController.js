@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
-import { get } from 'mongoose';
 
 export const UserController = {
     create: async (req, res) => {
@@ -68,14 +67,19 @@ export const UserController = {
     },
 
     modifyUser: async (req, res) => {
-        const userId = req.params.id;
-        const { name, email, password } = req.body;
         try {
-            const user = await User.findByIdAndUpdate(userId, { name, email, password }, { new: true });
-            if (!user) return res.status(404).json({ message: 'User not found' });
-            res.status(200).json({ message: 'User modified successfully', user });
+          const { id } = req.params;
+          const { password, ...otherUpdates } = req.body;
+      
+          let updates = { ...otherUpdates };
+          if (password) {
+            updates.password = await bcrypt.hash(password, 10);
+          }
+      
+          const user = await User.findByIdAndUpdate(id, updates, { new: true });
+          res.status(200).json({ message: 'User updated successfully', user });
         } catch (error) {
-            res.status(500).json({ message: 'Error modifying user' });
+          res.status(500).json({ message: 'Error updating user' });
         }
-    }
+      }
 }

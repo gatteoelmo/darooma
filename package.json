@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@number-flow/react": "^0.4.1",
+    "number-flow": "^0.4.0"
+  }
+}
