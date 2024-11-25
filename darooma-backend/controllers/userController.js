@@ -6,13 +6,18 @@ export const UserController = {
     create: async (req, res) => {
         const { name, email, password } = req.body;
         try {
-            const existingUser = await User.findOne({ email });
-            if (existingUser) return res.status(400).json({ message: 'User already exists' });
+            const existingEmail = await User.findOne({ email });
+            if (existingEmail) return res.status(400).json({ message: 'User already exists' });
+
+            // const existingName = await User.findOne({ name });
+            // if (existingName) return res.status(400).json({ message: 'Nickname already exists' });
           
             const user = new User({ name, email, password });
             await user.save();
+
+            const { password: _,  ...client } = user.toObject();          
         
-            res.status(201).json({ message: 'User registered successfully', user });
+            res.status(201).json({ message: 'User registered successfully', client });
           } catch (error) {
             res.status(500).json({ message: 'Error registering user' });
           }
@@ -22,7 +27,7 @@ export const UserController = {
         const { email, password } = req.body;
 
         try {
-            const user = await User.findOne({ email });
+            const user = await User.findOne({ email }, {__v: 0},);
             if (!user) return res.status(400).json({ message: 'Email not found' });
 
             const isMatch = await bcrypt.compare(password, user.password);
@@ -37,17 +42,19 @@ export const UserController = {
 
     getAllUsers: async (req, res) => {
         try {
-            const users = await User.find({__v: 0});
-            res.status(200).json(users);
+          // Trova tutti gli utenti e popola i loro obiettivi
+          const users = await User.find();
+          res.status(200).json(users);
         } catch (error) {
-            res.status(500).json({ message: 'Error retrieving users' });
+          console.error(error);
+          res.status(500).json({ message: 'Errore nel recuperare gli utenti' });
         }
-    },
+      },
 
     getUserById: async (req, res) => {
         const userId = req.params.id;
         try {
-            const user = await User.findById(userId ,{__v: 0});
+            const user = await User.findById(userId);
             if (!user) return res.status(404).json({ message: 'User not found' });
             res.status(200).json(user);
         } catch (error) {

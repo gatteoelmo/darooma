@@ -5,7 +5,7 @@ export const GoalController = {
     createGoal: async (req, res) => {
         const { user, title, description, difficulty, deadline } = req.body;
         const userExists = await User.findById(user);
-        console.log(user);
+        // console.log(user);
 
         if (!userExists) {
             return res.status(404).json({ message: 'User not found' });
@@ -54,6 +54,17 @@ export const GoalController = {
             res.status(500).json({ message: 'Errore del server' });
         }
     },
+
+    userGoals: async (req, res) => {
+        try {
+            const user = req.params.id;
+            const goals = await Goal.find({ user });
+            console.log(user);
+            res.status(200).json(goals);
+        } catch (error) {
+          res.status(500).json({ message: 'Errore del server' });
+        }
+      },
 
     successGoal: async (req, res) => {
         try {

@@ -28,6 +28,7 @@ const UserSchema = mongoose.Schema(
             type: [String],
             default: [],
         },
+        
     }
 );
 
