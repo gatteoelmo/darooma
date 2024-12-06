@@ -7,9 +7,11 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         overflow-x: hidden;
         user-select: none;
+        color: black;
     }
-
+    
     body {
         width: 100vw;
+        /* background-color:red; */
     }
 `   
