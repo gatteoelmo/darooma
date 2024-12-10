@@ -7,13 +7,14 @@ import { GlobalStyles } from "./components/styles/GlobalStyle.js";
 // import { Header } from "./components/Header.jsx";
 import { Home } from "./pages/Home.jsx";
 import { Dashboard } from "./pages/Dashboard.jsx";
+import { Background } from "./components/Background.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <GlobalStyles />
     <Provider store={store}>
       <Router>
-        {/* <Header /> */}
+        <Background />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />

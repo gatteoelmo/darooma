@@ -1,0 +1,29 @@
+import styled from "styled-components";
+
+export const DashboardStyled = styled.div`
+    width: 100vw;
+    height: 100vh;    
+    z-index: 3;
+    /* transition: all 0.5s ease; */
+    
+    
+    .blur {
+        position: absolute;
+        backdrop-filter: blur(20px);
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+
+    .goals-container {
+        margin-top: 100px;
+        padding : 20px;
+        z-index: 3;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-wrap: wrap;
+        width: 100vw;
+        grid-gap: 40px;
+    }
+`;

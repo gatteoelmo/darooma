@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { createAccount } from "../services/apiCalls";
 
 export const RegisterForm = () => {
   const {
@@ -7,7 +8,12 @@ export const RegisterForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    try {
+      console.log(data);
+      createAccount(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

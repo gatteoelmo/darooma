@@ -3,9 +3,9 @@ POST http://localhost:1234/api/users/register
 Content-Type: application/json
 
 {
-    "name": "Simo",
-    "email": "simo@me.com",
-    "password": "simo"
+    "name": "pinco",
+    "email": "pinco@me.com",
+    "password": "pinco"
 }
 
 ### login
@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 
 ### get all goals
-GET http://localhost:1234/api/goals/
+GET http://localhost:1234/api/goals
 
 ### create goal
 POST http://localhost:1234/api/goals/create

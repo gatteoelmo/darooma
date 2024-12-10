@@ -1,14 +1,28 @@
 import { useForm } from "react-hook-form";
+import { login } from "../services/apiCalls";
+import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { toggleScale } from "../redux/backgroundSlice";
 
 // eslint-disable-next-line react/prop-types
 export const LoginForm = ({ state, setState }) => {
+  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await login(data);
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboard");
+      // dispatch(toggleScale());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

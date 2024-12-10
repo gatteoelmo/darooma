@@ -1,14 +1,17 @@
 import { HomeStyled } from "../components/styles/HomeStyled";
-import gif from "../assets/gif/daroomaGif.gif";
-import backImage from "../assets/img/tav-3-center.png";
+// import gif from "../assets/gif/daroomaGif.gif";
+// import backImage from "../assets/img/tav-3-center.png";
 import LogoFont from "../assets/img/logo font.svg";
 import LogoSoya from "../assets/img/logo-soya.svg";
 import Logo from "../assets/img/logo 2.svg";
 import { useState } from "react";
 import { Form } from "../components/Form.jsx";
+import { toggleScale } from "../redux/backgroundSlice.js";
+import { useDispatch } from "react-redux";
 
 export const Home = () => {
   const [visibleLogin, setVisibleLogin] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <HomeStyled>
@@ -17,20 +20,12 @@ export const Home = () => {
         <button
           onClick={() => {
             visibleLogin ? setVisibleLogin(false) : setVisibleLogin(true);
+            dispatch(toggleScale());
           }}
         >
           {visibleLogin ? "Close" : "Start"}
         </button>
         <img src={LogoSoya} alt="" className="soya" />
-      </div>
-
-      <div className="background">
-        <div className="image-container">
-          <img src={backImage} alt="" className="image" />
-        </div>
-        <div className="gif-container">
-          <img src={gif} alt="" className="gif" />
-        </div>
       </div>
 
       <div className="container">
