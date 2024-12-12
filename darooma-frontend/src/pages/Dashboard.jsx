@@ -7,6 +7,9 @@ export const Dashboard = () => {
     <DashboardStyled>
       <Header />
       <div className="blur"></div>
+      <div className="hello">
+        <h2>Hello, ?name?! Let’s rack up some XP.</h2>
+      </div>
       <div className="goals-container">
         <Goal />
         <Goal />

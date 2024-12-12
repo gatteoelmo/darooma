@@ -6,6 +6,7 @@ export const HeaderStyled = styled.header`
     z-index: 99;
     display: flex;
     justify-content: space-between;
+    padding: 20px;
     /* align-items: center; */
     flex-direction: row;
     /* padding: 15px 15px; */
@@ -13,7 +14,7 @@ export const HeaderStyled = styled.header`
     animation: appear 2s ease-in-out;
 
     img {
-        height: 50px;
+        height: 40px;
         /* z-index: 2; */
         /* animation: scroll 3s ease linear; */
         /* width: 150px; */

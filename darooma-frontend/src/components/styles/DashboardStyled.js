@@ -2,22 +2,22 @@ import styled from "styled-components";
 
 export const DashboardStyled = styled.div`
     width: 100vw;
-    height: 100vh;    
+    /* height: 100vh;     */
     z-index: 3;
     /* transition: all 0.5s ease; */
     
-    
     .blur {
-        position: absolute;
+        position: fixed;
         backdrop-filter: blur(20px);
         width: 100%;
         height: 100%;
         z-index: 2;
     }
-
+    
     .goals-container {
-        margin-top: 100px;
+        margin-top: 20px;
         padding : 20px;
+        padding-right: 40px;
         z-index: 3;
         display: flex;
         justify-content: center;
@@ -26,4 +26,20 @@ export const DashboardStyled = styled.div`
         width: 100vw;
         grid-gap: 40px;
     }
-`;
+    .hello {
+        margin-top: 100px;
+        z-index: 6;
+        font-size: 30px;
+        text-align: center;
+        position: relative;
+        padding: 20px;
+
+        h2 {
+            color: red;
+            font-family: "Lacquer", serif;
+            font-size: 30px;
+            text-align: center;
+            position: relative;
+        }
+    }
+    `;

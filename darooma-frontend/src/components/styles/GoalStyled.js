@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const GoalStyled = styled.div`
+
     height: 330px;
     width: 330px;
     display: flex;
@@ -12,7 +13,31 @@ export const GoalStyled = styled.div`
     background-color: rgba(0, 0, 0, 0.2);
     box-shadow: inset  0 0 20px 0 rgba(0, 0, 0, 0.2);
     z-index: 2;
-    /* animation: appear 1s ease-in-out, scale .5s cubic-bezier(0.68, -0.55, 0.27, 1.55); */
+    position: relative;
+    overflow: visible;
+
+    .xp {
+        position: absolute;
+        top: 60px;
+        left: 60px; 
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        scale: 2;
+
+        span {
+            font-family: "Lacquer", serif;
+            color: rgb(230, 0, 0);
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        img {
+            height: 20px;
+        }
+    }
 
     h3 {
         color: white;
@@ -21,7 +46,7 @@ export const GoalStyled = styled.div`
         font-weight: 600;
     }
 
-    p {
+    .description {
         color: white;
         font-family: "Montserrat", serif;
         font-weight: 300;
@@ -29,30 +54,39 @@ export const GoalStyled = styled.div`
         text-align: center;
         padding: 10px;
     }
-    
-    /* box-shadow:  0 0 10px 0 rgba(0, 0, 0, 0.2); */
-    
 
-    img {
-        height: 100px;
+    .daruma {
+        position: relative;
+
+        img {
+            height: 100px;
+        }
+
+        button {            
+            height: 7.5px;
+            width: 7.5px;
+            border-radius: 5px;
+            border: none;
+            position: absolute;
+            top: 27.5px;
+            left: 57px;
+            cursor: pointer;
+        }
+        
     }
 
-    @keyframes appear {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }  
-
-    @keyframes scale {
-        0% {
-            transform: scale(0);
-        }
-        100% {
-            transform: scale(1);
-        }
+    .arrow {
+        position: absolute;
+        top: 20px;
+        right: -10px;
+        scale: 2;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        height: 40px;
+        pointer-events: none;
     }
 
+    &:hover .arrow {
+        opacity: 1;
+    }   
 `;

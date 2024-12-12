@@ -9,8 +9,8 @@ export const BackgroundStyled = styled.div`
         width: 100vw;
         height: 100vh;
         z-index: 1;
-        filter: blur(1px);
-        transition: transform 3s ease-in-out;
+        /* filter: blur(1px); */
+        transition: transform 1s ease-in-out;
 
 
         .image-container {
