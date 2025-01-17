@@ -11,7 +11,7 @@ export const Form = () => {
       {!visibleRegister ? (
         <LoginForm state={visibleRegister} setState={setVisibleRegister} />
       ) : (
-        <RegisterForm />
+        <RegisterForm state={visibleRegister} setState={setVisibleRegister} />
       )}
     </FormStyled>
   );

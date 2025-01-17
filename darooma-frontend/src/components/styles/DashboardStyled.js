@@ -28,11 +28,12 @@ export const DashboardStyled = styled.div`
     }
     .hello {
         margin-top: 100px;
-        z-index: 6;
+        z-index: 2;
         font-size: 30px;
         text-align: center;
         position: relative;
         padding: 20px;
+        height: 80px;
 
         h2 {
             color: red;
@@ -40,6 +41,11 @@ export const DashboardStyled = styled.div`
             font-size: 30px;
             text-align: center;
             position: relative;
+            
+
+            @media only screen and (max-width: 800px) {
+                font-size: 20px;
+            }
         }
     }
     `;

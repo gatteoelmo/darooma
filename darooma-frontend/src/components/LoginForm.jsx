@@ -18,6 +18,9 @@ export const LoginForm = ({ state, setState }) => {
     try {
       const response = await login(data);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("name", response.data.user.name);
+      localStorage.setItem("id", response.data.user._id);
+      localStorage.setItem("email", response.data.user.email);
       navigate("/dashboard");
       dispatch(toggleScale());
     } catch (error) {
@@ -50,10 +53,22 @@ export const LoginForm = ({ state, setState }) => {
       <label htmlFor="password">Your key to the vault.</label>
       <input
         style={errors.password && { border: "1px solid red" }}
-        {...register("password", { required: "Password is required" })}
+        {...register("password", {
+          required: "Password is required",
+          validate: (value) => {
+            if (value.length < 8) {
+              return "Not valid :(";
+            }
+            return true;
+          },
+        })}
         type="password"
         placeholder={errors.password ? "Not valid :(" : "password"}
+        name="password"
       />
+      {errors.password && (
+        <p style={{ marginTop: "5px" }}>{errors.password.message}</p>
+      )}
       <button className="login">Log in</button>
       <button className="register-button" onClick={() => setState(!state)}>
         New here? Let&apos;s get you started on your adventure!

@@ -71,8 +71,7 @@ export const GoalStyled = styled.div`
             top: 27.5px;
             left: 57px;
             cursor: pointer;
-        }
-        
+        }        
     }
 
     .arrow {
@@ -89,4 +88,14 @@ export const GoalStyled = styled.div`
     &:hover .arrow {
         opacity: 1;
     }   
+
+    .add-goal {
+        background-color: transparent;
+        border: none;
+        color: rgb(230, 0, 0);
+        font-family: "Montserrat", serif;
+        font-size: 100px;
+        font-weight: 100;
+        cursor: pointer;
+    }
 `;

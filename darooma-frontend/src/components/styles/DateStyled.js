@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DateStyled = styled.div`
     display: flex;
     flex-direction: row;
-    grid-gap: 2px;
+    grid-gap: 4px;
     position: absolute;
     bottom: -15px;
     text-align: center;

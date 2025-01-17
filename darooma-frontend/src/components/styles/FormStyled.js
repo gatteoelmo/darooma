@@ -10,7 +10,7 @@ export const FormStyled = styled.div`
     flex-direction: column;
     z-index: 3;
     animation: appear 0.5s ease-in-out; 
-    backdrop-filter: blur(30px);
+    backdrop-filter: blur(40px);
     padding-top: 100px;
         
         
@@ -38,7 +38,7 @@ export const FormStyled = styled.div`
             margin: 30px 0 10px 0;
         }
 
-        input {
+        input, select {
             /* width: 100%; */
             background-color: rgba(255, 255, 255, 0.05);
             /* backdrop-filter: blur(20px); */
@@ -49,6 +49,10 @@ export const FormStyled = styled.div`
             color: white;
             font-family: "Montserrat", serif;
             font-weight: 300;
+        }
+
+        select>option {
+            color: black;
         }
 
         input:focus {
@@ -64,7 +68,7 @@ export const FormStyled = styled.div`
             font-family: "Montserrat", serif;
         }
 
-        .login {
+        .login, .create {
             align-self: center;
             margin: 20px 0;
             padding: 10px 20px;

@@ -1,5 +1,5 @@
 import { GoalStyled } from "./styles/GoalStyled";
-// import DarumaNoEyes from "../assets/img/daruma-no-eyes.svg";
+import DarumaNoEyes from "../assets/img/daruma-no-eyes.svg";
 import DarumaOneEye from "../assets/img/daruma-1eye.svg";
 import Arrow from "../assets/img/arrow.svg";
 // import Xp from "../assets/img/xp.svg";
@@ -7,12 +7,13 @@ import XpRed from "../assets/img/xpRed.svg";
 import { useState } from "react";
 import { Date } from "./Date";
 
-export const Goal = () => {
+// eslint-disable-next-line react/prop-types
+export const Goal = ({ add, state, setState, title, description, xp }) => {
   const [completed, setCompleted] = useState(false);
-  return (
+  return !add ? (
     <GoalStyled>
       <div className="xp">
-        <span>50</span>
+        <span>{xp}</span>
         <img src={XpRed} alt="" />
       </div>
       <div className="daruma">
@@ -30,13 +31,18 @@ export const Goal = () => {
         alt=""
         style={{ display: completed ? "none" : "block" }}
       />
-      <h3>Goal</h3>
-      <p className="description">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi
-        doloremque vero ipsa officiis repellendus excepturi optio quo! Vel, sed
-        fuga!
-      </p>
+      <h3>{title}</h3>
+      <p className="description">{description}</p>
       <Date />
+    </GoalStyled>
+  ) : (
+    <GoalStyled>
+      <div className="daruma">
+        <img src={DarumaNoEyes} alt="" />
+      </div>
+      <button className="add-goal" onClick={() => setState(!state)}>
+        +
+      </button>
     </GoalStyled>
   );
 };

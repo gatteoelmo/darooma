@@ -1,16 +1,17 @@
 import { useForm } from "react-hook-form";
 import { createAccount } from "../services/apiCalls";
 
-export const RegisterForm = () => {
+// eslint-disable-next-line react/prop-types
+export const RegisterForm = ({ state, setState }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try {
-      console.log(data);
-      createAccount(data);
+      await createAccount(data);
+      setState(!state);
     } catch (error) {
       console.log(error);
     }
@@ -45,9 +46,6 @@ export const RegisterForm = () => {
         placeholder={errors.email ? "Email is required" : "email"}
         name="email"
       />
-      {errors.email && (
-        <p style={{ marginTop: "5px" }}>{errors.email.message}</p>
-      )}
       <label htmlFor="password">Pick a strong one—no Kryptonite allowed.</label>
       <input
         style={errors.password && { border: "1px solid red" }}

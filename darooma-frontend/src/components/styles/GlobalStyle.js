@@ -6,7 +6,7 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         overflow-x: hidden;
-        /* user-select: none; */
+        user-select: none;
         /* color: black; */
     }
     
