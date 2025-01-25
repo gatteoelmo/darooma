@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { GoalStyled } from "./styles/GoalStyled";
 import DarumaNoEyes from "../assets/img/daruma-no-eyes.svg";
 import DarumaOneEye from "../assets/img/daruma-1eye.svg";
@@ -7,8 +8,17 @@ import XpRed from "../assets/img/xpRed.svg";
 import { useState } from "react";
 import { Date } from "./Date";
 
-// eslint-disable-next-line react/prop-types
-export const Goal = ({ add, state, setState, title, description, xp }) => {
+export const Goal = ({
+  add,
+  state,
+  setState,
+  title,
+  description,
+  xp,
+  onComplete,
+  id,
+  completedApi,
+}) => {
   const [completed, setCompleted] = useState(false);
   return !add ? (
     <GoalStyled>
@@ -19,9 +29,14 @@ export const Goal = ({ add, state, setState, title, description, xp }) => {
       <div className="daruma">
         <img src={DarumaOneEye} alt="Daruma" />
         <button
-          onClick={() => setCompleted(!completed)}
+          onClick={() => {
+            setCompleted(!completed);
+            onComplete(id);
+            console.log(id);
+          }}
           style={{
-            backgroundColor: completed ? "rgba(10, 0, 0, 0.9)" : "white",
+            backgroundColor:
+              completed || completedApi ? "rgba(10, 0, 0, 0.9)" : "white",
           }}
         ></button>
       </div>

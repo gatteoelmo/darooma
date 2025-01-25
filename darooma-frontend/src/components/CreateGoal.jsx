@@ -2,6 +2,7 @@ import { FormStyled } from "./styles/FormStyled.js";
 import { useForm } from "react-hook-form";
 import { createGoal } from "../services/apiCalls";
 
+// eslint-disable-next-line react/prop-types
 export const CreateGoal = ({ setState, state }) => {
   const token = `Bearer ${localStorage.getItem("token")}`; // Aggiunge "Bearer " al token
   const { register, handleSubmit } = useForm();

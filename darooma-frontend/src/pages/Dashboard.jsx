@@ -3,9 +3,7 @@ import { Header } from "../components/Header";
 import { Goal } from "../components/Goal";
 import { useState, useEffect } from "react";
 import { CreateGoal } from "../components/CreateGoal";
-import { get, set } from "react-hook-form";
-import { getGoals } from "../services/apiCalls";
-import { use } from "react";
+import { getGoals, completeGoal } from "../services/apiCalls";
 
 export const Dashboard = () => {
   const name = localStorage.getItem("name");
@@ -24,10 +22,21 @@ export const Dashboard = () => {
     }
   };
 
+  const handleComplete = async (id) => {
+    try {
+      await completeGoal(id, token);
+      // setGoals([]);
+      fetchGoals();
+    } catch (error) {
+      console.log(`error in completing goal: ${error}`);
+    }
+  };
+
   useEffect(() => {
     setGoals([]);
     fetchGoals();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createGoalVisible]);
 
   return (
     <DashboardStyled>
@@ -45,8 +54,9 @@ export const Dashboard = () => {
           setState={setCreateGoalVisible}
           state={createGoalVisible}
         />
-        {goals.map((goal) => (
+        {[...goals].reverse().map((goal) => (
           <Goal
+            onComplete={handleComplete}
             key={goal._id}
             id={goal._id}
             title={goal.title}
@@ -54,9 +64,7 @@ export const Dashboard = () => {
             difficulty={goal.difficulty}
             xp={goal.xp}
             deadline={goal.deadline}
-            completed={goal.completed}
-            setState={setCreateGoalVisible}
-            state={createGoalVisible}
+            completedApi={goal.completed}
           />
         ))}
       </div>
