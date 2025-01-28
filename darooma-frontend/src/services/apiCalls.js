@@ -10,5 +10,7 @@ export const getGoals = (token) =>
     API.get(`/goals/userDashboard`, { headers: { Authorization: token } });
 export const createGoal = (data, token) =>
     API.post('/goals/create', data, { headers: { Authorization: token } });
-  export const completeGoal = (id, token) =>
+export const completeGoal = (id, token) =>
     API.patch(`/goals/success/${id}`, {}, { headers: { Authorization: token } });
+export const deleteGoal = (id, token) =>
+    API.delete(`/goals/delete/${id}`, { headers: { Authorization: token } });

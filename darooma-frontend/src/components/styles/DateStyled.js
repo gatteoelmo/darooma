@@ -9,6 +9,10 @@ export const DateStyled = styled.div`
     text-align: center;
     width: 150px;
 
+    img {
+        height: 80%
+    }
+
     span {
         flex: 1;
         

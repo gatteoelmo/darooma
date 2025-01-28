@@ -4,11 +4,15 @@ import { Goal } from "../components/Goal";
 import { useState, useEffect } from "react";
 import { CreateGoal } from "../components/CreateGoal";
 import { getGoals, completeGoal } from "../services/apiCalls";
+import { useSelector, useDispatch } from "react-redux"; // Importa useDispatch
+import { toggleDeleteGoalState } from "../redux/goalSlice";
 
 export const Dashboard = () => {
   const name = localStorage.getItem("name");
   const [goals, setGoals] = useState([]);
   const token = `Bearer ${localStorage.getItem("token")}`;
+  const deleteGoalState = useSelector((state) => state.goal.deleteGoalState); // Accesso diretto allo stato Redux
+  const dispatch = useDispatch(); // Inizializza il dispatcher per le azioni Redux
 
   const [createGoalVisible, setCreateGoalVisible] = useState(false);
 
@@ -18,17 +22,16 @@ export const Dashboard = () => {
       setGoals(response.data);
       console.log(response.data);
     } catch (error) {
-      console.log(`error in fetching goals: ${error}`);
+      console.error(`Error in fetching goals: ${error}`);
     }
   };
 
   const handleComplete = async (id) => {
     try {
       await completeGoal(id, token);
-      // setGoals([]);
-      fetchGoals();
+      fetchGoals(); // Aggiorna la lista degli obiettivi dopo aver completato uno
     } catch (error) {
-      console.log(`error in completing goal: ${error}`);
+      console.error(`Error in completing goal: ${error}`);
     }
   };
 
@@ -36,7 +39,11 @@ export const Dashboard = () => {
     setGoals([]);
     fetchGoals();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [createGoalVisible]);
+  }, [createGoalVisible, deleteGoalState]); // Usa lo stato Redux correttamente qui
+
+  const handleToggleDeleteGoalState = () => {
+    dispatch(toggleDeleteGoalState()); // Esegue il toggle dello stato Redux
+  };
 
   return (
     <DashboardStyled>
@@ -68,6 +75,21 @@ export const Dashboard = () => {
           />
         ))}
       </div>
+      <button
+        onClick={handleToggleDeleteGoalState}
+        style={{
+          margin: "20px",
+          padding: "10px 20px",
+          fontSize: "16px",
+          cursor: "pointer",
+          backgroundColor: "#ff4b4b",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+        }}
+      >
+        Toggle Delete State
+      </button>
     </DashboardStyled>
   );
 };

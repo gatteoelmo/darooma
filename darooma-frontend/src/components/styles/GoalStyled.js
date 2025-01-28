@@ -85,6 +85,19 @@ export const GoalStyled = styled.div`
         pointer-events: none;
     }
 
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .delete {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        opacity: .9;
+    }
+
     &:hover .arrow {
         opacity: 1;
     }   

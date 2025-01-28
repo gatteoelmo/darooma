@@ -6,7 +6,11 @@ import Arrow from "../assets/img/arrow.svg";
 // import Xp from "../assets/img/xp.svg";
 import XpRed from "../assets/img/xpRed.svg";
 import { useState } from "react";
-import { Date } from "./Date";
+import { CountdownTimer } from "./Date";
+import { TiDelete } from "react-icons/ti";
+import { deleteGoal } from "../services/apiCalls";
+import { useDispatch } from "react-redux";
+import { deleteGoalState } from "../redux/goalSlice";
 
 export const Goal = ({
   add,
@@ -18,8 +22,17 @@ export const Goal = ({
   onComplete,
   id,
   completedApi,
+  deadline,
 }) => {
   const [completed, setCompleted] = useState(false);
+  const token = `Bearer ${localStorage.getItem("token")}`;
+  const dispatch = useDispatch();
+  const onDelete = async () => {
+    deleteGoal(id, token);
+    console.log(id);
+    dispatch(deleteGoalState());
+  };
+
   return !add ? (
     <GoalStyled>
       <div className="xp">
@@ -40,6 +53,10 @@ export const Goal = ({
           }}
         ></button>
       </div>
+      <button className="delete" onClick={onDelete}>
+        <TiDelete size={30} />
+      </button>
+
       <img
         className="arrow"
         src={Arrow}
@@ -48,7 +65,8 @@ export const Goal = ({
       />
       <h3>{title}</h3>
       <p className="description">{description}</p>
-      <Date />
+      <CountdownTimer deadline={deadline} />
+      {/* <Date deadline={deadline} /> */}
     </GoalStyled>
   ) : (
     <GoalStyled>
