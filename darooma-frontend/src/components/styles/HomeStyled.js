@@ -98,6 +98,7 @@ export const HomeStyled = styled.div`
             .description {
                 order: 2;
                 backdrop-filter: blur(30px);
+                background-color: rgb(10, 10,10);
                 padding: 20px;
                 border-radius: 20px;
 
@@ -166,5 +167,7 @@ export const HomeStyled = styled.div`
                 margin:  0 20px;   
             }
         }
+
+
     }
 `;
