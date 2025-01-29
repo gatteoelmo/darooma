@@ -21,7 +21,6 @@ export const Dashboard = () => {
     isLoading,
     isError,
     error,
-    refetch,
   } = useQuery({
     queryKey: ["goals"],
     queryFn: () => getGoals(token),
@@ -59,9 +58,6 @@ export const Dashboard = () => {
       <div className="blur"></div>
       <div className="hello">
         <h2>Hello, {name}! Let’s rack up some XP.</h2>
-        <button onClick={() => refetch()} className="refresh-button">
-          Refresh Goals
-        </button>
       </div>
       <div className="goals-container">
         <Goal

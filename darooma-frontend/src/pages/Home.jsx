@@ -4,17 +4,38 @@ import { HomeStyled } from "../components/styles/HomeStyled";
 import LogoFont from "../assets/img/logo font.svg";
 import LogoSoya from "../assets/img/logo-soya.svg";
 import Logo from "../assets/img/logo 2.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form } from "../components/Form.jsx";
 import { toggleScale } from "../redux/backgroundSlice.js";
 import { useDispatch } from "react-redux";
+import { PreLoader } from "../components/PreLoader.jsx";
 
 export const Home = () => {
   const [visibleLogin, setVisibleLogin] = useState(false);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [startAnimation, setStartAnimation] = useState(false);
+
+  useEffect(() => {
+    // Dopo 3 secondi, avvia l'animazione
+    const animationTimer = setTimeout(() => {
+      setStartAnimation(true);
+    }, 4000); // Dopo 3 secondi
+
+    // Dopo 5 secondi, nascondi il preloader
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 6000); // Dopo 5 secondi
+
+    return () => {
+      clearTimeout(animationTimer);
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <HomeStyled>
+      {loading && <PreLoader startAnimation={startAnimation} />}
       <div className="topHome">
         <img src={Logo} alt="" className="logo" />
         <button

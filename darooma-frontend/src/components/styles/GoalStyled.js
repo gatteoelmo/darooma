@@ -5,9 +5,9 @@ export const GoalStyled = styled.div`
     height: 330px;
     width: 330px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 40px 20px;
     flex-direction: column;
     border-radius: 90px;
     background-color: rgba(0, 0, 0, 0.2);

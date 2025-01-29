@@ -4,11 +4,13 @@ import { login } from "../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleScale } from "../redux/backgroundSlice";
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 export const LoginForm = ({ state, setState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -19,7 +21,11 @@ export const LoginForm = ({ state, setState }) => {
   // Utilizzo di useMutation per la chiamata API di login
   const { mutate, isLoading, isError, error } = useMutation({
     mutationFn: login, // Funzione da chiamare
+    onMutate: () => {
+      setLoading(true);
+    },
     onSuccess: (response) => {
+      setLoading(false);
       // Salvataggio dei dati nel localStorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("name", response.data.user.name);
@@ -85,8 +91,7 @@ export const LoginForm = ({ state, setState }) => {
 
       {/* Bottone di login */}
       <button className="login" disabled={isLoading}>
-        {isLoading ? "Logging in..." : "Log in"}{" "}
-        {/* Mostra stato di caricamento */}
+        {loading ? "loggin in..." : "Log in"}
       </button>
 
       {/* Bottone per la registrazione */}
