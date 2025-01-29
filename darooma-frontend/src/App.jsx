@@ -8,18 +8,23 @@ import { GlobalStyles } from "./components/styles/GlobalStyle.js";
 import { Home } from "./pages/Home.jsx";
 import { Dashboard } from "./pages/Dashboard.jsx";
 import { Background } from "./components/Background.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <GlobalStyles />
     <Provider store={store}>
-      <Router>
-        <Background />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </Router>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Background />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </Router>
+      </QueryClientProvider>
     </Provider>
   </StrictMode>
 );

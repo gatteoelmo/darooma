@@ -85,6 +85,14 @@ export const GoalStyled = styled.div`
         pointer-events: none;
     }
 
+    .tick {
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        width: 80px;
+        
+    }
+
     button {
         background-color: transparent;
         border: none;
@@ -93,8 +101,8 @@ export const GoalStyled = styled.div`
 
     .delete {
         position: absolute;
-        top: 30px;
-        right: 40px;
+        top: 5px;
+        right: 150px;
         opacity: .9;
     }
 

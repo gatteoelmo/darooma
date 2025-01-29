@@ -1,5 +1,6 @@
 import { FormStyled } from "./styles/FormStyled.js";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createGoal } from "../services/apiCalls";
 
 // eslint-disable-next-line react/prop-types
@@ -7,17 +8,26 @@ export const CreateGoal = ({ setState, state }) => {
   const token = `Bearer ${localStorage.getItem("token")}`; // Aggiunge "Bearer " al token
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      await createGoal(data, token);
+  const queryClient = useQueryClient();
+
+  // Definizione della mutation
+  const mutation = useMutation({
+    mutationFn: (data) => createGoal(data, token),
+    onSuccess: () => {
       console.log("Goal created successfully!");
       setState(!state);
-    } catch (error) {
+      queryClient.invalidateQueries(["goals"]); // Aggiorna le query con chiave "goals"
+    },
+    onError: (error) => {
       console.error(
         "Error during goal creation",
         error.response?.data || error
       );
-    }
+    },
+  });
+
+  const onSubmit = (data) => {
+    mutation.mutate(data); // Usa la mutation per eseguire l'API call
   };
 
   return (
@@ -59,8 +69,12 @@ export const CreateGoal = ({ setState, state }) => {
           name="deadline"
           {...register("deadline", { required: "Deadline is required" })}
         />
-        <button type="submit" className="create">
-          Create
+        <button
+          type="submit"
+          className="create"
+          disabled={mutation.isLoading} // Disabilita il pulsante durante il caricamento
+        >
+          {mutation.isLoading ? "Creating..." : "Create"}
         </button>
       </form>
     </FormStyled>

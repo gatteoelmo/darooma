@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const goalSlice = createSlice({
   name: "goal",
   initialState: {
-    deleteGoalState: true,
+    deletedGoal: true,
   },
   reducers: {
     toggleDeleteGoalState: (state) => {
-      state.deleteGoalState = !state.deleteGoalState; // Modifica corretta dello stato
+      state.deletedGoal = !state.deletedGoal; // Modifica corretta dello stato
     },
   },
 });

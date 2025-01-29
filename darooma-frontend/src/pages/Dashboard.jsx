@@ -4,45 +4,51 @@ import { Goal } from "../components/Goal";
 import { useState, useEffect } from "react";
 import { CreateGoal } from "../components/CreateGoal";
 import { getGoals, completeGoal } from "../services/apiCalls";
-import { useSelector, useDispatch } from "react-redux"; // Importa useDispatch
-import { toggleDeleteGoalState } from "../redux/goalSlice";
+import { useSelector } from "react-redux";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const Dashboard = () => {
   const name = localStorage.getItem("name");
-  const [goals, setGoals] = useState([]);
   const token = `Bearer ${localStorage.getItem("token")}`;
-  const deleteGoalState = useSelector((state) => state.goal.deleteGoalState); // Accesso diretto allo stato Redux
-  const dispatch = useDispatch(); // Inizializza il dispatcher per le azioni Redux
+  const deleteGoalState = useSelector((state) => state.goal);
 
   const [createGoalVisible, setCreateGoalVisible] = useState(false);
 
-  const fetchGoals = async () => {
-    try {
-      const response = await getGoals(token);
-      setGoals(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error(`Error in fetching goals: ${error}`);
-    }
-  };
+  const queryClient = useQueryClient();
 
-  const handleComplete = async (id) => {
-    try {
-      await completeGoal(id, token);
-      fetchGoals(); // Aggiorna la lista degli obiettivi dopo aver completato uno
-    } catch (error) {
-      console.error(`Error in completing goal: ${error}`);
-    }
-  };
+  // Fetch goals with React Query
+  const {
+    data: goals = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["goals"],
+    queryFn: () => getGoals(token),
+    enabled: !createGoalVisible, // Prevent fetching while the modal is open
+    onError: (err) => console.error("Error fetching goals:", err),
+  });
 
+  // Mutation for completing a goal
+  const completeGoalMutation = useMutation({
+    mutationFn: (id) => completeGoal(id, token),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["goals"]); // Refetch goals after mutation
+    },
+    onError: (err) => console.error("Error completing goal:", err),
+  });
+
+  // Refetch goals when deleteGoalState changes
   useEffect(() => {
-    setGoals([]);
-    fetchGoals();
+    if (deleteGoalState) {
+      queryClient.invalidateQueries(["goals"]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [createGoalVisible, deleteGoalState]); // Usa lo stato Redux correttamente qui
+  }, [deleteGoalState]);
 
-  const handleToggleDeleteGoalState = () => {
-    dispatch(toggleDeleteGoalState()); // Esegue il toggle dello stato Redux
+  const handleComplete = (id) => {
+    completeGoalMutation.mutate(id);
   };
 
   return (
@@ -54,6 +60,9 @@ export const Dashboard = () => {
       <div className="blur"></div>
       <div className="hello">
         <h2>Hello, {name}! Let’s rack up some XP.</h2>
+        <button onClick={() => refetch()} className="refresh-button">
+          Refresh Goals
+        </button>
       </div>
       <div className="goals-container">
         <Goal
@@ -61,35 +70,28 @@ export const Dashboard = () => {
           setState={setCreateGoalVisible}
           state={createGoalVisible}
         />
-        {[...goals].reverse().map((goal) => (
-          <Goal
-            onComplete={handleComplete}
-            key={goal._id}
-            id={goal._id}
-            title={goal.title}
-            description={goal.description}
-            difficulty={goal.difficulty}
-            xp={goal.xp}
-            deadline={goal.deadline}
-            completedApi={goal.completed}
-          />
-        ))}
+        {isLoading ? (
+          <div>Loading goals...</div>
+        ) : isError ? (
+          <div>Error fetching goals: {error.message}</div>
+        ) : (
+          [...goals.data]
+            .reverse()
+            .map((goal) => (
+              <Goal
+                onComplete={handleComplete}
+                key={goal._id}
+                id={goal._id}
+                title={goal.title}
+                description={goal.description}
+                difficulty={goal.difficulty}
+                xp={goal.xp}
+                deadline={goal.deadline}
+                completedApi={goal.completed}
+              />
+            ))
+        )}
       </div>
-      <button
-        onClick={handleToggleDeleteGoalState}
-        style={{
-          margin: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          backgroundColor: "#ff4b4b",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-        }}
-      >
-        Toggle Delete State
-      </button>
     </DashboardStyled>
   );
 };
