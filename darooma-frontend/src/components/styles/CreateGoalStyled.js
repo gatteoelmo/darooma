@@ -10,6 +10,7 @@ export const CreateGoalStyled = styled.div`
     flex-direction: column;
     z-index: 3;    
     animation: appear 0.5s ease-in-out; 
+    will-change: opacity;
     backdrop-filter: blur(30px);
     padding-top: 100px;
 `

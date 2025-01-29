@@ -12,6 +12,7 @@ export const FormStyled = styled.div`
     animation: appear 0.5s ease-in-out; 
     backdrop-filter: blur(40px);
     padding-top: 100px;
+    will-change: opacity;
         
         
 
