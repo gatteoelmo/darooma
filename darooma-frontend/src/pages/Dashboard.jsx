@@ -15,7 +15,6 @@ export const Dashboard = () => {
   const [createGoalVisible, setCreateGoalVisible] = useState(false);
 
   const queryClient = useQueryClient();
-
   // Fetch goals with React Query
   const {
     data: goals = [],
