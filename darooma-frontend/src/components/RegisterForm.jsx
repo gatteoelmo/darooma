@@ -10,26 +10,26 @@ export const RegisterForm = ({ state, setState }) => {
     formState: { errors },
   } = useForm();
 
-  // Utilizzo di useMutation per la registrazione
+  // Using useMutation to call the createAccount API
   const { mutate, isLoading, isError, error } = useMutation({
-    mutationFn: createAccount, // Funzione da chiamare
+    mutationFn: createAccount,
     onSuccess: () => {
-      setState(!state); // Cambia lo stato in caso di successo
+      setState(!state);
     },
     onError: (error) => {
-      console.log(error); // Gestione errori, potrebbe essere più specifico
+      console.log(error);
     },
   });
 
   const onSubmit = (data) => {
-    mutate(data); // Esegue la mutazione con i dati
+    mutate(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Join the club, Jedi! The Force is stronger with your account.</h2>
 
-      {/* Nome */}
+      {/* name */}
       <label htmlFor="name">
         No pressure, just your identity for the Hall of Fame.
       </label>
@@ -86,13 +86,9 @@ export const RegisterForm = ({ state, setState }) => {
         <p style={{ marginTop: "5px" }}>{errors.password.message}</p>
       )}
 
-      {/* Bottone di registrazione */}
+      {/* register button */}
       <button className="login" disabled={isLoading}>
-        {isLoading ? (
-          <span className="spinner"></span> // Mostra una "spinning" durante il caricamento
-        ) : (
-          "Sign up"
-        )}
+        {isLoading ? "Signing up..." : "Sign up"}
       </button>
 
       {/* Messaggio di errore */}

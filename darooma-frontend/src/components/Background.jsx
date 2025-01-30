@@ -4,6 +4,7 @@ import { BackgroundStyled } from "./styles/BackgroundStyled";
 import { useSelector } from "react-redux";
 
 export const Background = () => {
+  //  when isScaled is true in the store, the background is scaled
   const background = useSelector((state) => state.background.isScaled);
 
   return (

@@ -7,26 +7,26 @@ export const PreLoader = ({ startAnimation }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // Inizia immediatamente il caricamento
+    // start immediately the preloader
     const interval = setInterval(() => {
       setCount((prevCount) => {
-        const increment = Math.floor(Math.random() * 10) + 1; // Incremento casuale tra 1 e 10
-        const nextCount = Math.min(prevCount + increment, 100); // Assicura che non superi 100
+        const increment = Math.floor(Math.random() * 10) + 1; // casual increment from 1 to 10
+        const nextCount = Math.min(prevCount + increment, 100); // stop at 100
         return nextCount;
       });
-    }, Math.floor(Math.random() * 100) + 70); // Intervallo casuale tra 50ms e 250ms
+    }, Math.floor(Math.random() * 70) + 50); // casual interval from 50ms to 70ms
 
-    // Forza il count a 100 al termine dell'animazione
+    // the count will be set to 100 after 3 seconds
     const timeout = setTimeout(() => {
       setCount(100);
       clearInterval(interval);
-    }, 3000); // Durata totale massima (es. 3 secondi)
+    }, 3000); // total duration (3 seconds)
 
     return () => {
-      clearInterval(interval); // Pulisce l'intervallo
-      clearTimeout(timeout); // Pulisce il timeout
+      clearInterval(interval); // clean the interval
+      clearTimeout(timeout); // clean the timeout
     };
-  }, []); // Si avvia una volta al montaggio del componente
+  }, []);
 
   return (
     <PreLoaderStyled className={startAnimation ? "animate" : ""}>

@@ -27,12 +27,12 @@ export const Goal = ({
   const token = `Bearer ${localStorage.getItem("token")}`;
   const dispatch = useDispatch();
 
-  // Usa useMutation per la cancellazione
+  // delete goal with mutate
   const { mutate: deleteGoalMutation, isLoading: isDeleting } = useMutation({
-    mutationFn: () => deleteGoal(id, token), // la funzione da eseguire
+    mutationFn: () => deleteGoal(id, token),
     onSuccess: () => {
       // console.log(`Goal ${id} deleted successfully`);
-      dispatch(toggleDeleteGoalState(id)); // aggiorna lo stato dopo la cancellazione
+      dispatch(toggleDeleteGoalState(id)); // update the state after deleting
     },
     onError: (error) => {
       console.error("Error deleting goal", error);
@@ -42,6 +42,8 @@ export const Goal = ({
   const onDelete = () => {
     deleteGoalMutation();
   };
+
+  // add is for the add goal form
 
   return !add ? (
     <GoalStyled>

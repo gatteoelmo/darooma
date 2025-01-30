@@ -7,10 +7,10 @@ export const goalSlice = createSlice({
   },
   reducers: {
     toggleDeleteGoalState: (state) => {
-      state.deletedGoal = !state.deletedGoal; // Modifica corretta dello stato
+      state.deletedGoal = !state.deletedGoal; 
     },
   },
 });
 
-export const { toggleDeleteGoalState } = goalSlice.actions; // Esporta l'azione correttamente
-export default goalSlice.reducer; // Esporta il reducer
+export const { toggleDeleteGoalState } = goalSlice.actions; 
+export default goalSlice.reducer; 

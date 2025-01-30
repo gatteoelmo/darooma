@@ -7,10 +7,11 @@ import { getUserById } from "../services/apiCalls.js";
 export const Header = () => {
   const navigate = useNavigate();
 
+  // states for xp and lvl
   const [xp, setXp] = useState(0);
   const [lvl, setLvl] = useState(0);
 
-  // Ottieni l'ID dell'utente dal localStorage
+  // fetch xp and lvl from id in localstorage
   useEffect(() => {
     const userId = localStorage.getItem("id");
     if (userId) {
@@ -26,6 +27,7 @@ export const Header = () => {
     }
   });
 
+  // function to log out
   const logOut = () => {
     localStorage.clear();
     navigate("/");

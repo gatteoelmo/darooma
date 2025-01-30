@@ -18,9 +18,9 @@ export const LoginForm = ({ state, setState }) => {
     formState: { errors },
   } = useForm();
 
-  // Utilizzo di useMutation per la chiamata API di login
+  // using useMutation to call the login API
   const { mutate, isLoading, isError, error } = useMutation({
-    mutationFn: login, // Funzione da chiamare
+    mutationFn: login,
     onMutate: () => {
       setLoading(true);
     },
@@ -30,25 +30,24 @@ export const LoginForm = ({ state, setState }) => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("name", response.data.user.name);
       localStorage.setItem("id", response.data.user._id);
-      localStorage.setItem("email", response.data.user.email);
-      localStorage.setItem("xp", response.data.user.xp);
-      navigate("/dashboard"); // Redirect alla dashboard
+      navigate("/dashboard"); // Redirect to dashboard
       dispatch(toggleScale());
     },
     onError: (error) => {
-      console.error(error); // Gestione degli errori (può essere più dettagliata)
+      console.log("there is an error in login");
+      console.error(error);
     },
   });
 
   const onSubmit = async (data) => {
-    mutate(data); // Invoca la mutazione con i dati del form
+    mutate(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Welcome back, adventurer. The quest awaits!</h2>
 
-      {/* Input per email */}
+      {/* email input */}
       <label htmlFor="email">What&apos;s your magic email, wizard?</label>
       <input
         style={errors.email && { border: "1px solid red" }}
@@ -69,7 +68,7 @@ export const LoginForm = ({ state, setState }) => {
         <p style={{ marginTop: "5px" }}>{errors.email.message}</p>
       )}
 
-      {/* Input per password */}
+      {/*  password input */}
       <label htmlFor="password">Your key to the vault.</label>
       <input
         style={errors.password && { border: "1px solid red" }}
@@ -90,17 +89,17 @@ export const LoginForm = ({ state, setState }) => {
         <p style={{ marginTop: "5px" }}>{errors.password.message}</p>
       )}
 
-      {/* Bottone di login */}
+      {/*login */}
       <button className="login" disabled={isLoading}>
         {loading ? "loggin in..." : "Log in"}
       </button>
 
-      {/* Bottone per la registrazione */}
+      {/* registrazione */}
       <button className="register-button" onClick={() => setState(!state)}>
         New here? Let&apos;s get you started on your adventure!
       </button>
 
-      {/* Gestione degli errori */}
+      {/* errors */}
       {isError && (
         <p style={{ color: "red", marginTop: "10px" }}>
           Something went wrong. Please try again.

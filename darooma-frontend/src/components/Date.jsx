@@ -6,14 +6,15 @@ import x from "../assets/img/x.svg";
 export const CountdownTimer = ({ deadline }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  // Funzione per calcolare il tempo rimanente
+  // function to calculate the time left
   function calculateTimeLeft() {
-    const now = new Date();
-    const target = new Date(deadline);
-    const difference = target - now;
+    const now = new Date(); // current date
+    const target = new Date(deadline); // target date
+    const difference = target - now; // difference in milliseconds
 
     if (difference > 0) {
       return {
+        // calculate the time left in days, hours, minutes
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / (1000 * 60)) % 60),
@@ -23,12 +24,14 @@ export const CountdownTimer = ({ deadline }) => {
     }
   }
 
+  // update the time left every second
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    return () => clearInterval(timer); // Pulizia del timer
+    return () => clearInterval(timer); // Cleanup on unmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

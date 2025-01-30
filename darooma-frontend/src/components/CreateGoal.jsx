@@ -6,18 +6,18 @@ import { TiDelete } from "react-icons/ti";
 
 // eslint-disable-next-line react/prop-types
 export const CreateGoal = ({ setState, state }) => {
-  const token = `Bearer ${localStorage.getItem("token")}`; // Aggiunge "Bearer " al token
+  const token = `Bearer ${localStorage.getItem("token")}`;
   const { register, handleSubmit } = useForm();
 
   const queryClient = useQueryClient();
 
-  // Definizione della mutation
+  // definition of the mutation
   const mutation = useMutation({
-    mutationFn: (data) => createGoal(data, token),
+    mutationFn: (data) => createGoal(data, token), // call the API with data and token
     onSuccess: () => {
-      console.log("Goal created successfully!");
-      setState(!state);
-      queryClient.invalidateQueries(["goals"]); // Aggiorna le query con chiave "goals"
+      // console.log("Goal created successfully!");
+      setState(!state); // Close the form
+      queryClient.invalidateQueries(["goals"]); // update the goals list
     },
     onError: (error) => {
       console.error(
@@ -27,9 +27,9 @@ export const CreateGoal = ({ setState, state }) => {
     },
   });
 
-  // Funzione per eseguire l'API call
+  // function to submit the form
   const onSubmit = (data) => {
-    mutation.mutate(data); // Usa la mutation per eseguire l'API call
+    mutation.mutate(data); // useùing the mutation to create the goal
   };
 
   return (
@@ -84,7 +84,7 @@ export const CreateGoal = ({ setState, state }) => {
         <button
           type="submit"
           className="create"
-          disabled={mutation.isLoading} // Disabilita il pulsante durante il caricamento
+          disabled={mutation.isLoading} // Disable the button while the mutation is loading
         >
           {mutation.isLoading ? "Creating..." : "Create"}
         </button>

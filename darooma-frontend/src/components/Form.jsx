@@ -4,6 +4,7 @@ import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 
 export const Form = () => {
+  // State for register page
   const [visibleRegister, setVisibleRegister] = useState(false);
 
   return (

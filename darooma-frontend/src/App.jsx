@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { GlobalStyles } from "./components/styles/GlobalStyle.js";
 import { Home } from "./pages/Home.jsx";
 import { Dashboard } from "./pages/Dashboard.jsx";
-import { ErrorPage } from "./pages/ErrorPage.jsx"; // Importa la pagina di errore
+import { ErrorPage } from "./pages/ErrorPage.jsx";
 import { Background } from "./components/Background.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

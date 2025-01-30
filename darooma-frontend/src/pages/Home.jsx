@@ -1,6 +1,4 @@
 import { HomeStyled } from "../components/styles/HomeStyled";
-// import gif from "../assets/gif/daroomaGif.gif";
-// import backImage from "../assets/img/tav-3-center.png";
 import LogoFont from "../assets/img/logo font.svg";
 import LogoSoya from "../assets/img/logo-soya.svg";
 import Logo from "../assets/img/logo 2.svg";
@@ -17,16 +15,15 @@ export const Home = () => {
   const [startAnimation, setStartAnimation] = useState(false);
 
   useEffect(() => {
-    // Dopo 3 secondi, avvia l'animazione
+    // after 4 seconds, hide the preloader
     const animationTimer = setTimeout(() => {
       setStartAnimation(true);
-    }, 4000); // Dopo 3 secondi
+    }, 4000); // after 4 seconds
 
-    // Dopo 5 secondi, nascondi il preloader
+    // after 5 seconds, hide the preloader
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 6000); // Dopo 5 secondi
-
+    }, 6000); // after 6 seconds
     return () => {
       clearTimeout(animationTimer);
       clearTimeout(timer);
