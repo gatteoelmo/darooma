@@ -17,7 +17,7 @@ export const DashboardStyled = styled.div`
     .goals-container {
         margin-top: 20px;
         padding : 20px;
-        padding-right: 40px;
+        margin-bottom: 100px;
         z-index: 3;
         display: flex;
         justify-content: center;
@@ -27,7 +27,7 @@ export const DashboardStyled = styled.div`
         grid-gap: 40px;
     }
     .hello {
-        margin-top: 100px;
+        margin-top: 130px;
         z-index: 2;
         font-size: 30px;
         text-align: center;

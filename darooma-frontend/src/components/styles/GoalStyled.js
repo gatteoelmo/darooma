@@ -88,7 +88,7 @@ export const GoalStyled = styled.div`
     .tick {
         position: absolute;
         top: 30px;
-        right: 20px;
+        right: 25px;
         width: 80px;
         
     }
@@ -101,8 +101,8 @@ export const GoalStyled = styled.div`
 
     .delete {
         position: absolute;
-        top: 5px;
-        right: 150px;
+        top: 27px;
+        right: 110px;
         opacity: .9;
     }
 

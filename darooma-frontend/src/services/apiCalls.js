@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "https://daroomaapi.onrender.com/api",
+    // baseURL: "https://daroomaapi.onrender.com/api",
+    baseURL: "http://localhost:1234/api",
 });
 
 export const createAccount = async (data) => API.post("/users/register", data);
@@ -14,3 +15,4 @@ export const completeGoal = async (id, token) =>
     API.patch(`/goals/success/${id}`, {}, { headers: { Authorization: token } });
 export const deleteGoal = async (id, token) =>
     API.delete(`/goals/delete/${id}`, { headers: { Authorization: token } });
+export const getUserById = async (id) => API.get(`/users/byId/${id}`);

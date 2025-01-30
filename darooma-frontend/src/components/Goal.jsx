@@ -31,7 +31,7 @@ export const Goal = ({
   const { mutate: deleteGoalMutation, isLoading: isDeleting } = useMutation({
     mutationFn: () => deleteGoal(id, token), // la funzione da eseguire
     onSuccess: () => {
-      console.log(`Goal ${id} deleted successfully`);
+      // console.log(`Goal ${id} deleted successfully`);
       dispatch(toggleDeleteGoalState(id)); // aggiorna lo stato dopo la cancellazione
     },
     onError: (error) => {
@@ -54,7 +54,7 @@ export const Goal = ({
         <button
           onClick={() => {
             onComplete(id);
-            console.log(id);
+            // console.log(id);
           }}
           style={{
             backgroundColor: completedApi ? "rgba(10, 0, 0, 0.9)" : "white",

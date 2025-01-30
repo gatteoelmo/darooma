@@ -2,6 +2,7 @@ import { FormStyled } from "./styles/FormStyled.js";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createGoal } from "../services/apiCalls";
+import { TiDelete } from "react-icons/ti";
 
 // eslint-disable-next-line react/prop-types
 export const CreateGoal = ({ setState, state }) => {
@@ -32,6 +33,16 @@ export const CreateGoal = ({ setState, state }) => {
 
   return (
     <FormStyled>
+      <TiDelete
+        onClick={() => setState(!state)}
+        size={30}
+        style={{
+          cursor: "pointer",
+          position: "absolute",
+          top: "130px",
+          right: "10px",
+        }}
+      />
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="title">Every quest needs a title.</label>
         <input
