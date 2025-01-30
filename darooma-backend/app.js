@@ -5,13 +5,11 @@ import userRoute from './routes/userRoute.js'
 import goalRoute from './routes/goalRoute.js'
 import cors from 'cors'
 
-
 dotenv.config();
 
 connectDB();
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
