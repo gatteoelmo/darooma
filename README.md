@@ -1,6 +1,6 @@
 # Darooma - Your Goal-Tracking App
 
-![Descrizione dell'immagine](./darooma-frontend/src/assets/img/logo%202.svg)
+![Draooma](./darooma-frontend/src/assets/img/logo%202.svg)
 
 Darooma is a friendly and motivational app inspired by the Japanese Daruma doll, designed to help you set, track, and achieve your goals. Whether you're tackling personal challenges or creating objectives for group activities like Dungeons & Dragons, Darooma is here to keep you on track and level up your journey!
 
