@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-    // baseURL: "https://daroomaapi.onrender.com/api",
-    baseURL: "http://localhost:1234/api",
+    baseURL: "https://daroomaapi.onrender.com/api",
+    // baseURL: "http://localhost:1234/api",
 });
 
 export const createAccount = async (data) => API.post("/users/register", data);
