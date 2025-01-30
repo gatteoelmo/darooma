@@ -10,6 +10,7 @@ export const Header = () => {
   const [xp, setXp] = useState(0);
   const [lvl, setLvl] = useState(0);
 
+  // Ottieni l'ID dell'utente dal localStorage
   useEffect(() => {
     const userId = localStorage.getItem("id");
     if (userId) {

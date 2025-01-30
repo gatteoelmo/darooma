@@ -14,7 +14,7 @@ export const PreLoader = ({ startAnimation }) => {
         const nextCount = Math.min(prevCount + increment, 100); // Assicura che non superi 100
         return nextCount;
       });
-    }, Math.floor(Math.random() * 70) + 50); // Intervallo casuale tra 50ms e 250ms
+    }, Math.floor(Math.random() * 100) + 70); // Intervallo casuale tra 50ms e 250ms
 
     // Forza il count a 100 al termine dell'animazione
     const timeout = setTimeout(() => {
