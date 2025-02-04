@@ -35,6 +35,7 @@ export const FormStyled = styled.div`
         label {
             color: white;
             font-family: "Montserrat", serif;
+            font-size: 1.8vh;
             font-weight: 300;
             margin: 30px 0 10px 0;
         }
