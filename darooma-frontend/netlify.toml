@@ -2,3 +2,8 @@
   command = "npm run build"   # Comando di build per Vite
   publish = "dist"            # Cartella dove Vite mette i file di produzione
   functions = "netlify/functions" # Se usi funzioni Lambda su Netlify
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
