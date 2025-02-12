@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createGoal } from "../services/apiCalls";
 import { TiDelete } from "react-icons/ti";
+import { Helmet } from "react-helmet";
 
 // eslint-disable-next-line react/prop-types
 export const CreateGoal = ({ setState, state }) => {
@@ -34,6 +35,10 @@ export const CreateGoal = ({ setState, state }) => {
 
   return (
     <FormStyled>
+      <Helmet>
+        <title>ADD GOAL</title>
+        <meta name="description" content="Create a goal" />
+      </Helmet>
       <TiDelete
         onClick={() => setState(!state)}
         size={30}
@@ -59,7 +64,9 @@ export const CreateGoal = ({ setState, state }) => {
           type="text"
           placeholder="Description"
           name="description"
-          {...register("description", { required: "Description is required" })}
+          {...register("description", {
+            required: "Description is required",
+          })}
         />
         <label htmlFor="difficulty">
           Is this a warm-up, a challenge, or an epic battle?

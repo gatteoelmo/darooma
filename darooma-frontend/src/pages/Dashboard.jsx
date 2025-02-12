@@ -6,6 +6,7 @@ import { CreateGoal } from "../components/CreateGoal";
 import { getGoals, completeGoal } from "../services/apiCalls";
 import { useSelector } from "react-redux";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 export const Dashboard = () => {
   const name = localStorage.getItem("name");
@@ -51,6 +52,9 @@ export const Dashboard = () => {
 
   return (
     <DashboardStyled>
+      <Helmet>
+        <title>YOUR GOALS</title>
+      </Helmet>
       {createGoalVisible && (
         <CreateGoal setState={setCreateGoalVisible} state={createGoalVisible} />
       )}
